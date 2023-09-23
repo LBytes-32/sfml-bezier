@@ -1,8 +1,8 @@
 #include "bezier.hpp"
 
 Bezier::Bezier() {
-    Point1 = ControlPoint { 0, 0 };
-    Point2 = ControlPoint { 0, 0 };
+    Control1 = sf::Vector2f { 0, 0 };
+    Control2 = sf::Vector2f { 0, 0 };
 }
 
 float Bezier::BaseEquation (const float& dim1, const float& dim2, const float& time) {
@@ -14,11 +14,11 @@ float Bezier::BaseEquation (const float& dim1, const float& dim2, const float& t
 }
 
 float Bezier::CalcDimensionX (const float& time) {
-    return BaseEquation(Point1.X, Point2.X, time);
+    return BaseEquation(Control1.x, Control2.x, time);
 }
 
 float Bezier::CalcDimensionY (const float& time) {
-    return BaseEquation(Point1.Y, Point2.Y, time);
+    return BaseEquation(Control1.y, Control2.y, time);
 }
 
 float Bezier::ApproxCurveHeight (const float& time_target) {
@@ -41,4 +41,17 @@ float Bezier::ApproxCurveHeight (const float& time_target) {
     }
     
     return CalcDimensionY(pivot);
+}
+
+sf::Vector2f Bezier::GetScaled2DPoint(Bezier& bezierX, Bezier& bezierY, sf::Vector2f start, sf::Vector2f end, float time) {
+    float xRatio = bezierX.ApproxCurveHeight(time);
+    float yRatio = bezierY.ApproxCurveHeight(time);
+    
+    float xPos = (end.x - start.y) * xRatio + start.x;
+    float yPos = (end.y - start.y) * yRatio + start.y;
+    
+    xPos += (end.y - start.y) * (yRatio - time);
+    yPos -= (end.x - start.x) * (yRatio - time);
+    
+    return sf::Vector2f(xPos, yPos);
 }

@@ -1,13 +1,11 @@
 #pragma once
+#include <SFML/System.hpp>
 #include <cmath>
 
 // Backend for calculating Bezier equations. Does not directly display anything.
+// Control points are restricted to the domain and range of [0, 1].
+// The curve may be used as a ratio, and scaled as needed.
 class Bezier {
-    public:
-        struct ControlPoint {
-            float X, Y;
-        };
-        
     private:
         // Abstracted equation for calculating the curve per dimension.
         // Pass values of the same dimension. (Both `X1` and `X2`, or, both `Y1` and `Y2`)
@@ -16,8 +14,8 @@ class Bezier {
         
     public:
         const int CURVE_PRECISION = 10;
-        ControlPoint Point1;
-        ControlPoint Point2;
+        sf::Vector2f Control1;
+        sf::Vector2f Control2;
         
         Bezier ();
         
@@ -29,5 +27,7 @@ class Bezier {
         
         // Approximate the height at the `target_time`.
         float ApproxCurveHeight (const float& target_time);
+        
+        // Given 2 bezier curves (representing the `X` and `Y` dimensions) 
+        static sf::Vector2f GetScaled2DPoint(Bezier& bezierX, Bezier& bezierY, sf::Vector2f start, sf::Vector2f end, float time);
 };
-
