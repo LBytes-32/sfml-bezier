@@ -44,14 +44,17 @@ float Bezier::ApproxCurveHeight (const float& time_target) {
 }
 
 sf::Vector2f Bezier::GetScaled2DPoint(Bezier& bezierX, Bezier& bezierY, sf::Vector2f start, sf::Vector2f end, float time) {
-    
     sf::Vector2f position;
     
     float xRatio = bezierX.ApproxCurveHeight(time);
     float yRatio = bezierY.ApproxCurveHeight(time);
     
+    // Calculate the parallel path. (Bezier X Component)
     position.x = (end.x - start.x) * xRatio + start.x;
-    position.y = (end.y - start.y) * yRatio + start.y;
+    position.y = (end.y - start.y) * xRatio + start.y;
+    
+    // Calculate the perpendicular path. (Bezier Y Component)
+    
     
     return position;
 }

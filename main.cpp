@@ -25,7 +25,7 @@ int main() {
     bezierY.Control1 = sf::Vector2f {0, 0};
     bezierY.Control1 = sf::Vector2f {1, 1};
     
-    BezierVisual visual(bezierX, bezierY, {570, 200}, {670, 300}, 0.03);
+    BezierVisual visual(bezierX, bezierY, {520, 150}, {720, 350}, 0.03);
     BezierEditor editorX(bezierX, {20, 20}, {200, 460});
     BezierEditor editorY(bezierY, {240, 20}, {200, 460});
     

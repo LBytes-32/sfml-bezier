@@ -28,7 +28,7 @@ class Bezier {
         float CalcDimensionY (const float& time);
         
         // Approximate the height at the `target_time`.
-        float ApproxCurveHeight (const float& target_time);
+        float ApproxCurveHeight (const float& time_target);
         
         // Given 2 bezier curves (representing the `X` and `Y` dimensions) 
         static sf::Vector2f GetScaled2DPoint(Bezier& bezierX, Bezier& bezierY, sf::Vector2f start, sf::Vector2f end, float time);
