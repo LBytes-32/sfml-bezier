@@ -6,8 +6,8 @@ class BezierVisual : public sf::Drawable {
     private:
         static const int STEPS_IN_PATH = 40;
         
-        Bezier BezierX;
-        Bezier BezierY;
+        Bezier& BezierX;
+        Bezier& BezierY;
         
         struct {
             sf::Vector2f  Start;
@@ -28,7 +28,7 @@ class BezierVisual : public sf::Drawable {
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
         
     public:
-        BezierVisual(sf::Vector2f start, sf::Vector2f end, float speed);
+        BezierVisual(Bezier& bezierX, Bezier& bezierY, sf::Vector2f start, sf::Vector2f end, float speed);
         
         void Update();
         void Redirect();

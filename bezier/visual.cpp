@@ -1,12 +1,6 @@
 #include "visual.hpp"
 
-BezierVisual::BezierVisual(sf::Vector2f start, sf::Vector2f end, float speed) {
-    BezierX.Control1 = sf::Vector2f {0, 0};
-    BezierX.Control2 = sf::Vector2f {1, 1};
-    
-    BezierY.Control1 = sf::Vector2f {0, 0};
-    BezierY.Control1 = sf::Vector2f {1, 1};
-    
+BezierVisual::BezierVisual(Bezier& bezierX, Bezier& bezierY, sf::Vector2f start, sf::Vector2f end, float speed) : BezierX(bezierX), BezierY(bezierY) {
     Animation.Start = start;
     Animation.End   = end;
     Animation.Speed = speed;

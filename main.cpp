@@ -15,7 +15,16 @@ int main() {
     sf::RenderWindow *window = new sf::RenderWindow(sf::VideoMode(800, 500), "SFML Bezier", sf::Style::Default, settings);
     window->setFramerateLimit(60);
     
-    BezierVisual visual({100, 100}, {400, 400}, 0.015);
+    Bezier bezierX;
+    Bezier bezierY;
+    
+    bezierX.Control1 = sf::Vector2f {0, 0};
+    bezierX.Control2 = sf::Vector2f {1, 1};
+    
+    bezierY.Control1 = sf::Vector2f {0, 0};
+    bezierY.Control1 = sf::Vector2f {1, 1};
+    
+    BezierVisual visual(bezierX, bezierY, {100, 100}, {400, 400}, 0.03);
     
     while (window->isOpen()) {
         sf::Event event;
