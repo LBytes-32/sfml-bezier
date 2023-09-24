@@ -2,8 +2,9 @@
 #include <memory>
 #include <iostream>
 #include <cmath>
-#include "bezier/visual.hpp"
 
+#include "bezier/visual.hpp"
+#include "bezier/editor.hpp"
 
 
 int main() {
@@ -25,6 +26,7 @@ int main() {
     bezierY.Control1 = sf::Vector2f {1, 1};
     
     BezierVisual visual(bezierX, bezierY, {100, 100}, {400, 400}, 0.03);
+    BezierEditor editor(bezierX, {10, 10}, {30, 120});
     
     while (window->isOpen()) {
         sf::Event event;
@@ -48,9 +50,15 @@ int main() {
         // Render the contents.
         window->clear();
         
-        visual.Update();
-        window->draw(visual);
+        sf::Vector2f mouse;
+        mouse.x = sf::Mouse::getPosition(*window).x;
+        mouse.y = sf::Mouse::getPosition(*window).y;
         
+        visual.Update();
+        editor.Update(mouse);
+        
+        window->draw(editor);
+        window->draw(visual);
         window->display();
     }
     
