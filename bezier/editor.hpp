@@ -10,8 +10,12 @@ class BezierEditor : public sf::Drawable {
         Bezier& TargetBezier;
         
         struct {
-            int SelectedPoint;
-        } Options;
+            sf::Vector2f Position;
+            sf::Vector2f Size;
+            sf::Vector2f Scale;
+            sf::Vector2f Origin;
+            int          SelectedPoint;
+        } Properties;
         
         struct {
             sf::RectangleShape Container;
@@ -23,6 +27,8 @@ class BezierEditor : public sf::Drawable {
         
         void RestrainPoint(sf::CircleShape& point);
         void UpdatePoints(sf::Vector2f mouse);
+        void UpdateBezier();
+        void UpdateGraph();
         
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
         

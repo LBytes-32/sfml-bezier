@@ -25,8 +25,9 @@ int main() {
     bezierY.Control1 = sf::Vector2f {0, 0};
     bezierY.Control1 = sf::Vector2f {1, 1};
     
-    BezierVisual visual(bezierX, bezierY, {100, 100}, {400, 400}, 0.03);
-    BezierEditor editor(bezierX, {10, 10}, {30, 120});
+    BezierVisual visual(bezierX, bezierY, {570, 200}, {670, 300}, 0.03);
+    BezierEditor editorX(bezierX, {20, 20}, {200, 460});
+    BezierEditor editorY(bezierY, {240, 20}, {200, 460});
     
     while (window->isOpen()) {
         sf::Event event;
@@ -54,10 +55,12 @@ int main() {
         mouse.x = sf::Mouse::getPosition(*window).x;
         mouse.y = sf::Mouse::getPosition(*window).y;
         
+        editorX.Update(mouse);
+        editorY.Update(mouse);
         visual.Update();
-        editor.Update(mouse);
-        
-        window->draw(editor);
+
+        window->draw(editorX);
+        window->draw(editorY);
         window->draw(visual);
         window->display();
     }
