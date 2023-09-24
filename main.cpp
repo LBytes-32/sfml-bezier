@@ -1,6 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include <iostream>
+#include <cmath>
 #include "bezier/visual.hpp"
+
+
 
 int main() {
     // Use antialiasing.
@@ -11,7 +15,7 @@ int main() {
     sf::RenderWindow *window = new sf::RenderWindow(sf::VideoMode(800, 500), "SFML Bezier", sf::Style::Default, settings);
     window->setFramerateLimit(60);
     
-    BezierVisual visual({100, 100}, {400, 400}, 0.01);
+    BezierVisual visual({100, 100}, {400, 400}, 0.015);
     
     while (window->isOpen()) {
         sf::Event event;

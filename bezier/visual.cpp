@@ -1,14 +1,14 @@
 #include "visual.hpp"
 
 BezierVisual::BezierVisual(sf::Vector2f start, sf::Vector2f end, float speed) {
-    BezierX.Control1 = sf::Vector2f {0, 1};
-    BezierX.Control2 = sf::Vector2f {0, 1};
+    BezierX.Control1 = sf::Vector2f {0, 0};
+    BezierX.Control2 = sf::Vector2f {1, 1};
     
-    BezierY.Control1 = sf::Vector2f {0, 1};
-    BezierY.Control1 = sf::Vector2f {0, 1};
+    BezierY.Control1 = sf::Vector2f {0, 0};
+    BezierY.Control1 = sf::Vector2f {1, 1};
     
     Animation.Start = start;
-    Animation.End = end;
+    Animation.End   = end;
     Animation.Speed = speed;
     
     Animation.Time = 0;
@@ -33,10 +33,13 @@ sf::Vector2f BezierVisual::GetPosition(float time) {
 }
 
 void BezierVisual::UpdateTime() {
-    if (Animation.IsMovingForward)
-        Animation.Time += (Animation.Time + Animation.Speed <= 1) ? Animation.Speed : 0;
-    else
-        Animation.Time -= (Animation.Time - Animation.Speed >= 0) ? Animation.Speed : 0;
+    Animation.Time += Animation.Speed * (Animation.IsMovingForward ? 1 : -1);
+    
+    if (Animation.Time > 1)
+        Animation.Time = 1;
+    
+    if (Animation.Time < 0)
+        Animation.Time = 0;
 }
 
 void BezierVisual::UpdatePath() {

@@ -47,11 +47,8 @@ sf::Vector2f Bezier::GetScaled2DPoint(Bezier& bezierX, Bezier& bezierY, sf::Vect
     float xRatio = bezierX.ApproxCurveHeight(time);
     float yRatio = bezierY.ApproxCurveHeight(time);
     
-    float xPos = (end.x - start.y) * xRatio + start.x;
+    float xPos = (end.x - start.x) * xRatio + start.x;
     float yPos = (end.y - start.y) * yRatio + start.y;
-    
-    xPos += (end.y - start.y) * (yRatio - time);
-    yPos -= (end.x - start.x) * (yRatio - time);
     
     return sf::Vector2f(xPos, yPos);
 }

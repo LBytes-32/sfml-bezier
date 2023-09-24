@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/System.hpp>
 #include <cmath>
+#include <iostream>
 
 // Backend for calculating Bezier equations. Does not directly display anything.
 // Control points are restricted to the domain and range of [0, 1].
@@ -14,6 +15,7 @@ class Bezier {
         
     public:
         const int CURVE_PRECISION = 10;
+        
         sf::Vector2f Control1;
         sf::Vector2f Control2;
         
