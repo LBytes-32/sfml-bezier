@@ -41,7 +41,7 @@ sf::Vector2f BezierEditor::RatioToPoint(sf::Vector2f ratio) {
 sf::Vector2f BezierEditor::PointToRatio(sf::Vector2f point) {
     return {
         (point.x - Properties.Origin.x) / Properties.Scale.x,
-        (point.y - Properties.Origin.y) / Properties.Scale.y
+        (point.y - Properties.Origin.y) / -Properties.Scale.y
     };
 }
 
@@ -92,13 +92,9 @@ void BezierEditor::UpdatePoints(sf::Vector2f mouse) {
 void BezierEditor::UpdateBezier() {
     auto point1 = Visual.Point1.getPosition();
     auto point2 = Visual.Point2.getPosition();
-    auto origin = Properties.Origin;
-    auto scale  = Properties.Scale;
     
-    TargetBezier.Control1.x = (point1.x - origin.x) / scale.x;
-    TargetBezier.Control2.x = (point2.x - origin.x) / scale.x;
-    TargetBezier.Control1.y = (point1.y - origin.y) / -scale.y;
-    TargetBezier.Control2.y = (point2.y - origin.y) / -scale.y;
+    TargetBezier.Control1 = PointToRatio(point1);
+    TargetBezier.Control2 = PointToRatio(point2);
 }
 
 void BezierEditor::UpdateGraph() {
