@@ -1,8 +1,8 @@
 #include "bezier.hpp"
 
-Bezier::Bezier() {
-    Control1 = sf::Vector2f { 0, 0 };
-    Control2 = sf::Vector2f { 0, 0 };
+Bezier::Bezier(sf::Vector2f control1, sf::Vector2f control2) {
+    Control1 = control1;
+    Control2 = control2;
 }
 
 float Bezier::BaseEquation (const float& dim1, const float& dim2, const float& time) {
@@ -54,7 +54,7 @@ sf::Vector2f Bezier::GetScaled2DPoint(Bezier& bezierX, Bezier& bezierY, sf::Vect
     position.y = (end.y - start.y) * xRatio + start.y;
     
     // Calculate the perpendicular path. (Bezier Y Component)
-    
+    // TODO: Find the right equation
     
     return position;
 }

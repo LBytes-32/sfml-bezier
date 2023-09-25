@@ -19,7 +19,7 @@ class Bezier {
         sf::Vector2f Control1;
         sf::Vector2f Control2;
         
-        Bezier ();
+        Bezier (sf::Vector2f control1 = {0, 0}, sf::Vector2f control2 = {1, 1});
         
         // Calculate the curve's X dimension at any given `time`.
         float CalcDimensionX (const float& time);

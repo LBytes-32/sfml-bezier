@@ -16,18 +16,12 @@ int main() {
     sf::RenderWindow *window = new sf::RenderWindow(sf::VideoMode(800, 500), "SFML Bezier", sf::Style::Default, settings);
     window->setFramerateLimit(60);
     
-    Bezier bezierX;
-    Bezier bezierY;
-    
-    bezierX.Control1 = sf::Vector2f {0, 0};
-    bezierX.Control2 = sf::Vector2f {1, 1};
-    
-    bezierY.Control1 = sf::Vector2f {0, 0};
-    bezierY.Control1 = sf::Vector2f {1, 1};
-    
-    BezierVisual visual(bezierX, bezierY, {520, 150}, {720, 350}, 0.03);
-    BezierEditor editorX(bezierX, {20, 20}, {200, 460});
-    BezierEditor editorY(bezierY, {240, 20}, {200, 460});
+    // Create 2 bezier components to represent each X and Y dimension
+    Bezier       bezierX;
+    Bezier       bezierY;
+    BezierVisual visual  (bezierX, bezierY, {520, 150}, {720, 350}, 0.03);
+    BezierEditor editorX (bezierX, {20, 20}, {200, 460});
+    BezierEditor editorY (bezierY, {240, 20}, {200, 460});
     
     while (window->isOpen()) {
         sf::Event event;
@@ -40,6 +34,7 @@ int main() {
                     window->close();
                     break;
                 
+                // Redirect the animation if space is pressed.
 				case sf::Event::KeyPressed:
 					if (event.key.code == sf::Keyboard::Key::Space) {
 						visual.Redirect();
@@ -48,9 +43,9 @@ int main() {
             }
         }
         
-        // Render the contents.
         window->clear();
         
+        // Get the mouse position. Store them as floating point.
         sf::Vector2f mouse;
         mouse.x = sf::Mouse::getPosition(*window).x;
         mouse.y = sf::Mouse::getPosition(*window).y;
