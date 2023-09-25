@@ -36,7 +36,7 @@ void BezierVisual::UpdateTime() {
         Animation.Time = 0;
 }
 
-void BezierVisual::UpdatePath() {
+void BezierVisual::UpdateVisualizedPath() {
     float t = 0;
     float dt = 1 / (float)(STEPS_IN_PATH);
     sf::Vector2f pos;
@@ -50,7 +50,7 @@ void BezierVisual::UpdatePath() {
 
 void BezierVisual::Update() {
     UpdateTime();
-    UpdatePath();
+    UpdateVisualizedPath();
     
     sf::Vector2f ballPosition = GetPosition(Animation.Time);
     
