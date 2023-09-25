@@ -25,6 +25,9 @@ class BezierEditor : public sf::Drawable {
             sf::Vertex         Vertices[VERTEX_COUNT];
         } Visual;
         
+        sf::Vector2f RatioToPoint (sf::Vector2f ratio);
+        sf::Vector2f PointToRatio (sf::Vector2f position);
+        
         void RestrainPoint(sf::CircleShape& point);
         void UpdatePoints(sf::Vector2f mouse);
         void UpdateBezier();

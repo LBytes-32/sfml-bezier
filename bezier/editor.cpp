@@ -15,8 +15,8 @@ BezierEditor::BezierEditor(Bezier& bezier, sf::Vector2f position, sf::Vector2f s
     Visual.Buffer = sf::VertexBuffer(sf::PrimitiveType::TriangleStrip, sf::VertexBuffer::Usage::Stream);
     Visual.Buffer.create(VERTEX_COUNT);
     
-    Visual.Point1.setPosition(position);
-    Visual.Point2.setPosition(position.x + size.x, position.y + size.y);
+    Visual.Point1.setPosition(RatioToPoint({0, 0}));
+    Visual.Point2.setPosition(RatioToPoint({1, 1}));
     Visual.Point1.setOrigin(5, 5);
     Visual.Point2.setOrigin(5, 5);
     
@@ -29,6 +29,20 @@ void BezierEditor::Update(sf::Vector2f mouse) {
     UpdatePoints(mouse);
     UpdateBezier();
     UpdateGraph();
+}
+
+sf::Vector2f BezierEditor::RatioToPoint(sf::Vector2f ratio) {
+    return {
+        ratio.x *  Properties.Scale.x + Properties.Origin.x,
+        ratio.y * -Properties.Scale.y + Properties.Origin.y
+    };
+}
+
+sf::Vector2f BezierEditor::PointToRatio(sf::Vector2f point) {
+    return {
+        (point.x - Properties.Origin.x) / Properties.Scale.x,
+        (point.y - Properties.Origin.y) / Properties.Scale.y
+    };
 }
 
 void BezierEditor::RestrainPoint(sf::CircleShape& point) {
